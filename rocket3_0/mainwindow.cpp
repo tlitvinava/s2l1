@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
+#include "rocket.h"
+//#include <QMessageBox>
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,7 +17,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::paintEvent(QPaintEvent *)// отрисовка обьекта
 {
-    QPainter painter;
+   /* QPainter painter;
     painter.begin(this);
 
     QPen pen;
@@ -50,20 +52,10 @@ void MainWindow::paintEvent(QPaintEvent *)// отрисовка обьекта
 
     painter.drawLine(0,520,1000,520);
 
-    painter.end();
+    painter.end();*/
 
 
 }
-
-QGraphicsItemGroup* group = new QGraphicsItemGroup();
-
-QGraphicsItem* pol; // предположим, что item1 - это ваш первый объект
-QGraphicsItem* pol1;
-QGraphicsItem* pol2;
-QGraphicsItem* Ellipce; // предположим, что item1 - это ваш первый объект
-    // предположим, что item1 - это ваш первый объект
-    // предположим, что item2 - это ваш второй объект
-// добавьте больше объектов по мере необходимости
 
 void MainWindow::on_pushButton_clicked()
 {
