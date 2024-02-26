@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "mainwindow.h"// все
 //#include "rocket1.h"
 #include <QApplication>
 //#include <QPushButton>
