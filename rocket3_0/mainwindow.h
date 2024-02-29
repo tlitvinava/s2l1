@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QPainter>
-//#include "rocket.h"
+#include "Rocket.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,7 +27,7 @@ private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+   // Ui::MainWindow *ui;
 
 protected:
 void paintEvent (QPaintEvent*) override;

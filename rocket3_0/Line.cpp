@@ -1,32 +1,32 @@
-#include "line.h"//вроде все
+#include "Line.h"//вроде все
 #include <QPainter>
 
 
-void Rock::paintEvent(QPaintEvent *event)
-{
+/*void Rock::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     drawR(&painter);
+}*/
+
+void Line::drawR(QPainter *painter)
+{
+    painter->drawLine(100,700-y,100,500-y);//?
 }
 
-void Rock::drawR(QPainter *painter)
+void Line::move()
 {
-    //painter->drawRect(x,150,200,50);//?
-}
+    y+=50*m;
 
-void Rock::move()
-{
-    x+=5*m;
-    if(x>600||x<10)
+    /*if(x>600||x<10)
     {
         m*=-1;
         x+=10*m;
     }
     if(x==200)
         s--;
-
+*/
 }
 
-bool Rock::dr(int sch)
+bool Line::dr(int sch)
 {
     if(s<=0&&!be)
         s=sch,be=true;

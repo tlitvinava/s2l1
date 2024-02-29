@@ -1,6 +1,6 @@
 #include "mainwindow.h"//вроде все
 #include "ui_mainwindow.h"
-#include "rocket.h"
+#include "Rocket.h"
 #include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,19 +17,20 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *)// отрисовка обьекта
 {
     QPainter painter(this);
-    R->drawRocket(&painter);
+    R->drawR(&painter);
 
 }
 
 void MainWindow::on_pushButton_clicked()
 {
     R->move();
-    while (!R->dr(2)) {
-        repaint();
+    repaint();
+    /*while (!R->dr(2)) {
+        //repaint();
         R->move();
         for (int i = 0; i < (int) 1e7; i++)
             ;
-    }
+    }*/
 }
 
 /*MainWindow::MainWindow(QWidget *parent)

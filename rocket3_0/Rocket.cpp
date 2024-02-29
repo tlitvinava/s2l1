@@ -1,20 +1,18 @@
 #include <QPainter>//вроде все
-#include "rocket.h"
+#include "Rocket.h"
 
-//rocket::rocket() {}
-void Rocket::paintEvent(QPaintEvent *event)
+Rocket::Rocket() {}
+
+/*void Line::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     //drawR(&painter);
-    drawRocket(&painter);
-}
+    //drawRocket(&painter);
+}*/
 
 void Rocket::drawRocket(QPainter *painter)
 {
-    drawR(painter);
-    //painter->drawEllipse(x,200,50,50);
-    //painter->drawEllipse(150+x,200,50,50);
-    drawR(painter);
+    //drawR(painter);
     QPen pen;
     pen.setColor(Qt::black);
     pen.setStyle(Qt::SolidLine);
@@ -28,7 +26,7 @@ void Rocket::drawRocket(QPainter *painter)
 
     QPolygon pol;
     pol<<QPoint(100,700)<<QPoint(100,500)<<QPoint(150,450)<<QPoint(200,500)<<QPoint(200,700)<<QPoint(220,720)<<QPoint(80,720)<<QPoint(100,700);
-    painter.drawPolygon(pol);
+    painter->drawPolygon(pol);
 
     QPolygon pol1;
     pol1<<QPoint(100,700)<<QPoint(200,700);
