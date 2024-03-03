@@ -1,4 +1,4 @@
-#include <QPainter>//вроде все
+#include <QPainter>
 #include "Rocket.h"
 
 Rocket::Rocket() {}
@@ -42,6 +42,29 @@ void Rocket::drawRocket(QPainter *painter)
     painter->setBrush(brush1);
 
     painter->drawEllipse(125, 525-y, 50,50);
+}
 
+void Rocket::drawFlame(QPainter *painter)
+{
+
+    if(engineStarted){
+    drawR(painter);
+    QPen pen;
+    pen.setColor(Qt::black);
+    pen.setStyle(Qt::SolidLine);
+    pen.setWidth(5);
+    painter->setPen(pen);
+
+    QBrush brush;
+    brush.setColor(Qt::red);
+    brush.setStyle(Qt::SolidPattern);
+    painter->setBrush(brush);
+
+    QPolygon flame;
+    flame<<QPoint(100,720-y)<<QPoint(120,750-y)<<QPoint(140,730-y)<<QPoint(160,760-y)<<QPoint(180,725-y)<<QPoint(190,745-y)<<QPoint(200,720-y);
+    painter->drawPolygon(flame);
+    }
 
 }
+
+

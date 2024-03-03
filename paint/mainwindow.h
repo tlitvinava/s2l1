@@ -1,9 +1,8 @@
-#ifndef MAINWINDOW_H//вроде все
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPainter>
-#include "Rocket.h"
+#include "Drawer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,26 +15,22 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    Rocket *R = new Rocket;
-    Rocket *F = new Rocket;
-    //Line *R = new Line;
+    Drawer *R = new Drawer();
+    Polygon *polygon = nullptr;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 private:
     Ui::MainWindow *ui;
 
 private slots:
-    void on_pushButton_clicked();
 
-private:
 
-protected:
-void paintEvent (QPaintEvent*) override;
-
+    void on_pushButton_pressed();
 };
-
 #endif // MAINWINDOW_H
-
-
-

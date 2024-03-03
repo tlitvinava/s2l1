@@ -16,16 +16,5 @@ private:
     bool be=false;
 };
 
-
-/*class Rocket : public QWidget {
-    Q_OBJECT
-
-public:
-    Rocket(QWidget *parent = nullptr);
-
-protected:
-    void paintEvent(QPaintEvent *event) override;
-};
-*/
 #endif // LINE_H
 

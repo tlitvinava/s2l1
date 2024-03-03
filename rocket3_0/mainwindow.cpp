@@ -1,14 +1,25 @@
-#include "mainwindow.h"//вроде все
+#include "mainwindow.h"//если второй раз нажимаешь возникает бесконечный цикл
 #include "ui_mainwindow.h"
 #include "Rocket.h"
-//#include "Line.h"
 #include <QPainter>
+#include <QPixmap>
+#include <QPalette>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
+    int width = 2000; // ширина в пикселях
+    int height = 1000;
     ui->setupUi(this);
+    //this->setStyleSheet("QWidget { background-image: url (/home/taisa/Загрузки/640px-Безмятежность.png); }");
+    QPixmap bkgnd("/home/taisa/Загрузки/640px-Безмятежность.png");
+    bkgnd = bkgnd.scaled(width, height, Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, bkgnd);
+    this->setPalette(palette);
+
 }
 
 MainWindow::~MainWindow()
@@ -17,13 +28,18 @@ MainWindow::~MainWindow()
 }
 void MainWindow::paintEvent(QPaintEvent *)// отрисовка обьекта
 {
+
+
     QPainter painter(this);
     R->drawRocket(&painter);
+    R->drawFlame(&painter);
+
 
 }
 
 void MainWindow::on_pushButton_clicked()
 {
+    R->engineStarted=true;
     R->move();
     repaint();
 
@@ -34,33 +50,5 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
-/*MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-}
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-    T->drawCar(&painter);
-    //r->drawR();
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    T->move();
-    while (!T->dr(2)) {
-        repaint();
-        T->move();
-        for (int i = 0; i < (int) 1e7; i++)
-            ;
-    }
-}*/
 
