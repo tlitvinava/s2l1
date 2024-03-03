@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
 
 public:
     Rocket *R = new Rocket;
+    //Line *R = new Line;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -27,14 +28,17 @@ private slots:
     void on_pushButton_clicked();
 
 private:
-   // Ui::MainWindow *ui;
+    //Ui::MainWindow *ui;
 
 protected:
-void paintEvent (QPaintEvent*) override;
+void paintEvent (QPaintEvent*) override;//!!!!!!!!
 
 };
 
 #endif // MAINWINDOW_H
+
+
+
 
 
 /*QT_BEGIN_NAMESPACE

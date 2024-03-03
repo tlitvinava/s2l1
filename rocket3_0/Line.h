@@ -6,7 +6,7 @@
 class Line:public QWidget{
 public:
     int y=0;
-    //void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event);
     void drawR(QPainter *painter);
     void move();
     bool dr(int sch);
