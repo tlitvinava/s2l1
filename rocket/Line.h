@@ -11,7 +11,7 @@ public:
     void move();
     bool dr(int sch);
 private:
-    int m=1;// как должно все расти
+    int m=1;
     int s=-1;
     bool be=false;
 };

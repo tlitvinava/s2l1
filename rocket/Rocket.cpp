@@ -46,7 +46,6 @@ void Rocket::drawRocket(QPainter *painter)
 
 void Rocket::drawFlame(QPainter *painter)
 {
-
     if(engineStarted){
     drawR(painter);
     QPen pen;
@@ -64,7 +63,6 @@ void Rocket::drawFlame(QPainter *painter)
     flame<<QPoint(100,720-y)<<QPoint(120,750-y)<<QPoint(140,730-y)<<QPoint(160,760-y)<<QPoint(180,725-y)<<QPoint(190,745-y)<<QPoint(200,720-y);
     painter->drawPolygon(flame);
     }
-
 }
 
 

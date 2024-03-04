@@ -1,7 +1,6 @@
 #include "Line.h"
 #include <QPainter>
 
-
 void Line::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     drawR(&painter);

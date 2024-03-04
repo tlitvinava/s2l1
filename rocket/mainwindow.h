@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H//вроде все
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow
 public:
     Rocket *R = new Rocket;
     Rocket *F = new Rocket;
-    //Line *R = new Line;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
