@@ -1,7 +1,9 @@
 #include <QPainter>
 #include "Rocket.h"
 
-Rocket::Rocket() {}
+Rocket::Rocket() {
+    engineStarted=false;
+}
 
 void Rocket::paintEvent(QPaintEvent *event)
 {
@@ -46,6 +48,7 @@ void Rocket::drawRocket(QPainter *painter)
 
 void Rocket::drawFlame(QPainter *painter)
 {
+    qDebug()<<engineStarted;
     if(engineStarted){
     drawR(painter);
     QPen pen;
@@ -64,5 +67,8 @@ void Rocket::drawFlame(QPainter *painter)
     painter->drawPolygon(flame);
     }
 }
+
+
+
 
 

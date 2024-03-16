@@ -20,5 +20,15 @@ void Line::move()
     y+=2;
 }
 
+void Line::moveDown()
+{
+
+        y-=2;
+    /*maxY = 720.0;
+    if (this->pos().y() > maxY) {
+        this->setPos(this->pos().x(), maxY);
+    }*/
+}
+
 
 
