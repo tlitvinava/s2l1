@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    int width = 1500; // ширина в пикселях
+    int width = 1500; // ширина в пикселях                      //здесь мы добавляем задний фон но это не обязательно
     int height = 840;
     ui->setupUi(this);
     QPixmap bkgnd("/home/taisa/Загрузки/640px-Безмятежность.png");
@@ -20,19 +20,19 @@ MainWindow::MainWindow(QWidget *parent)
     this->setPalette(palette);
 }
 
-MainWindow::~MainWindow()
+MainWindow::~MainWindow()//это деструктор, стоит по умолчанию
 {
     delete ui;
 }
-void MainWindow::paintEvent(QPaintEvent *)// отрисовка обьекта
+void MainWindow::paintEvent(QPaintEvent *)// отрисовка обьекта. указываем обьекту класса ракета который мы создали в хедре нарисовать себя своим методом
 {
-    QPainter painter(this);
-    R->drawRocket(&painter);
-    R->drawFlame(&painter);
+    QPainter painter(this);//указать чтобы пэинтер тебе рисовал именно тот обьект, который ты добавила в окно
+    R->drawRocket(&painter);//отрисовка ракеты
+    R->drawFlame(&painter);//отрисовка пламени
 
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked()//здесь мы прописываем то, что происходит при нажатии кнопки
 {
     R->engineStarted=true;
     //R->setVisible(true);
@@ -40,35 +40,26 @@ void MainWindow::on_pushButton_clicked()
 
     //R->drawFlame(&painter);
 
- qDebug()<<"In mw1"<<R->engineStarted;
-    R->move();
-    repaint();
+ qDebug()<<"In mw1"<<R->engineStarted;//это тебе не надо
+    R->move();//эти две строки для начального движения ракеты
+    repaint();//без репэинта у тебя не будет изменятся фигура
 
-    for(int i=0;i<450;i++){
+    for(int i=0;i<450;i++){//цикл в котором ракета по шагу равному 2 плавно поднимается вверх
         R->move();
         repaint();
     }
     //R->setVisible(false);
     R->engineStarted=false;
-    qDebug()<<"In mw2"<<R->engineStarted;
-    //R->eraseFlame(&painter);
-    repaint();
+    qDebug()<<"In mw2"<<R->engineStarted;//тоже не надо
+    repaint();//это так, на крайняк, думаю можно не писать
 
 }
 
-
-
-
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_2_clicked()//то же самое что в предыдущей кнопке, тольк ракета опускается вниз
 {
-    //R->setVisible(true);
     R->engineStarted=true;
-    //QPainter painter(this);
 
-    //R->drawFlame(&painter);
-
-
-    if(R->y < 720){
+    if(R->y < 720){//это нижняя граница чтобы ракета не улетала в землю
         return;
     }
 
@@ -81,8 +72,7 @@ void MainWindow::on_pushButton_2_clicked()
 
     R->engineStarted=false;
     repaint();
-    //R->setVisible(false);
-    //R->eraseFlame(&painter);
+
 
 
 

@@ -1,4 +1,4 @@
-#include "figuremodel.h"
+#include "figuremodel.h"//основной класс от которого наследуются все фигуры
 
 #include <QPainter>
 #include <QPolygon>

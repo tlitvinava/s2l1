@@ -1,8 +1,8 @@
 #ifndef ROCKET_H
 #define ROCKET_H
-#include "Line.h"
+#include "Line.h"//подключаем хедр линии т к тут происходит наследование
 
-class Rocket : public Line {
+class Rocket : public Line {//это хедр самой ракеты, тут в этой строке создаем и называем класс ракеты и указываем наследование от линии и все функции что имеет линия переходят к ракете как например движение
 public:
     bool engineStarted = false;
     Rocket();

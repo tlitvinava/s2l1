@@ -1,32 +1,32 @@
 #include <QPainter>
-#include "Rocket.h"
+#include "Rocket.h"//подключаем хедр
 
-Rocket::Rocket() {
+Rocket::Rocket() {//это основной класс, в котором мы задаем рисование ракеты и пламени, но не забываем, что методы движения ракета уже унаследовала от линии и писать их здесь не нужно
     engineStarted=false;
 }
 
-void Rocket::paintEvent(QPaintEvent *event)
+void Rocket::paintEvent(QPaintEvent *event)//обьявляем пэинтер и вызываем его
 {
     QPainter painter(this);
     drawR(&painter);
     drawRocket(&painter);
 }
 
-void Rocket::drawRocket(QPainter *painter)
+void Rocket::drawRocket(QPainter *painter)//отрисовка ракеты
 {
     drawR(painter);
-    QPen pen;
+    QPen pen;//свойства линии
     pen.setColor(Qt::black);
     pen.setStyle(Qt::SolidLine);
     pen.setWidth(5);
     painter->setPen(pen);
 
-    QBrush brush;
+    QBrush brush;//свойства заливки
     brush.setColor(Qt::white);
     brush.setStyle(Qt::SolidPattern);
     painter->setBrush(brush);
 
-    QPolygon pol;
+    QPolygon pol;//функции рисования
     pol<<QPoint(100,700-y)<<QPoint(100,500-y)<<QPoint(150,450-y)<<QPoint(200,500-y)<<QPoint(200,700-y)<<QPoint(220,720-y)<<QPoint(80,720-y)<<QPoint(100,700-y);
     painter->drawPolygon(pol);
 
@@ -46,7 +46,7 @@ void Rocket::drawRocket(QPainter *painter)
     painter->drawEllipse(125, 525-y, 50,50);
 }
 
-void Rocket::drawFlame(QPainter *painter)
+void Rocket::drawFlame(QPainter *painter)//то же самое с пламенем
 {
     qDebug()<<engineStarted;
     if(engineStarted){

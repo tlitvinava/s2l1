@@ -1,33 +1,30 @@
-#include "Line.h"
-#include <QPainter>
+#include "Line.h"//хедр подключаем к соответствующему сппшнику
+#include <QPainter>//библиотека, без которой рисование обьекта не возможно именно эта штука потом будет рисовать обьект
 
 void Line::paintEvent(QPaintEvent *event) {
-    QPainter painter(this);
+    QPainter painter(this);//обьявляем пэинтер и вызываем его
     drawR(&painter);
 }
 
-void Line::drawR(QPainter *painter)
+void Line::drawR(QPainter *painter)//реализация отрисовки обьекта
 {
-    QPen pen;
+    QPen pen;                   //здесь все кроме последней строчки устанавливаем стиль в котором рисуется линия но это не обязательно
     pen.setColor(Qt::black);
     pen.setStyle(Qt::SolidLine);
     painter->setPen(pen);
-    painter->drawLine(100,700-y,100,500-y);
+    painter->drawLine(100,700-y,100,500-y);//отрисовка линии, для разных фигур есть разные функции, можно в инете глянуть, для прямоугольника вроде drawRect(и в скобочках какие то параметры которых я не помню)
 }
 
-void Line::move()
+void Line::move()//метод, который передвигает все точки по оси у вверх
 {
     y+=2;
 }
 
-void Line::moveDown()
+void Line::moveDown()//метод, который передвигает все точки по оси у вниз
 {
 
         y-=2;
-    /*maxY = 720.0;
-    if (this->pos().y() > maxY) {
-        this->setPos(this->pos().x(), maxY);
-    }*/
+
 }
 
 

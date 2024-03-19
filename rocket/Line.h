@@ -1,12 +1,11 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include <QWidget>
+#include <QWidget>//нужен для того чтобы было "окно" в котором можно рисовать
 
-class Line:public QWidget{
-public:
+class Line:public QWidget{//хедр в котором обьявляются переменные и методы, реализация которых в сппшнике соответственно
+public:                     //если что это хедр для родительского класса
     int y=0;
-    //double maxY;
     void paintEvent(QPaintEvent *event);
     void drawR(QPainter *painter);
     void move();

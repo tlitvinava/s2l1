@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <triangle.h>
+#include <triangle.h>//добавляем хедры всех фигур которые должны отображаться в в окне
 #include <circle.h>
 #include <line.h>
 #include <square.h>
@@ -41,8 +41,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-///////////////
-void MainWindow::updateAreaDisplay(QString newArea) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+void MainWindow::updateAreaDisplay(QString newArea) {//между этих двух комментариев должен быть подсчет площади, периметра и центра фигуры но он пока в разработке
     ui->label_2->setText("S: " + newArea);
 }
 
@@ -83,11 +83,11 @@ void MainWindow::infoFigure(FigureModel* figure){
 
 //////////////////////////////////////////////////////////////////////
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked()//создаем кнопки для каждой из фигур и при их нажатии создаем обьект нужного класса и добавляем на сцену + в форме добавляем graphics view - поле где будем все рисовать
 {
     Triangle *tr = new Triangle();
     scene->addItem(tr);
-    lastFigureModel=tr;
+    lastFigureModel=tr;//это потом пригодится для увеличения/уменьшения фигуры и поворота
 
 }
 
@@ -172,7 +172,7 @@ void MainWindow::on_pushButton_10_clicked()
 }
 
 
-void MainWindow::on_pushButton_11_clicked()
+void MainWindow::on_pushButton_11_clicked()//метод для вращения
 {
     QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
 
@@ -192,7 +192,7 @@ void MainWindow::on_pushButton_11_clicked()
 }
 
 
-void MainWindow::on_pushButton_12_clicked()
+void MainWindow::on_pushButton_12_clicked()//метод очистки поля
 {
         scene->clear();
 }
@@ -218,7 +218,7 @@ void MainWindow::on_pushButton_13_clicked()//масштабирование в 2
 }
 
 
-void MainWindow::on_pushButton_14_clicked()
+void MainWindow::on_pushButton_14_clicked()//масштабирование в 0.5 раз
 {
     //QTransform transform; // Объявляем transform здесь
     QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
@@ -239,7 +239,7 @@ void MainWindow::on_pushButton_14_clicked()
 }
 
 
-void MainWindow::on_pushButton_15_clicked()
+void MainWindow::on_pushButton_15_clicked()//вращение но уже в другую сторону
 {
     QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
 
