@@ -7,14 +7,21 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QKeyEvent>
+#include <QTimer>
+#include <QTransform>
+#include <QPushButton>
 
 class FigureModel : public QGraphicsItem {
 private:
     bool setCenter = false;
+    QTimer *timer;
+
 
 public:
     int centerX = 0, centerY = 0;
     int mouseX, mouseY;
+    double square=0;
+    double perimetr=0;
 
     explicit FigureModel(QGraphicsItem *parent = nullptr);
 
@@ -29,5 +36,12 @@ public:
     void move(int dx, int dy);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    virtual double calculateSquare()=0;
+    virtual double calculatePerimetr()=0;
+
+
+private slots:
+    //void rotate();
+
 };
 #endif // FIGUREMODEL_H

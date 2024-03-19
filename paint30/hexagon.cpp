@@ -23,3 +23,11 @@ void Hexagon::draw(QPainter *painter){
 void Hexagon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     draw(painter);
 }
+
+double Hexagon::calculatePerimetr(){
+    return 2;
+}
+
+double Hexagon::calculateSquare(){
+    return 21;
+}

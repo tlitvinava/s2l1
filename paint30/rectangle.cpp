@@ -19,3 +19,11 @@ void Rectangle::draw(QPainter *painter){
 void Rectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     draw(painter);
 }
+
+double Rectangle::calculatePerimetr(){
+    return 4;
+}
+
+double Rectangle::calculateSquare(){
+    return 41;
+}

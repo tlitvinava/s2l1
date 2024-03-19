@@ -1,7 +1,5 @@
 #include "figuremodel.h"
 
-//figuremodel::figuremodel() {}
-
 #include <QPainter>
 #include <QPolygon>
 
@@ -11,8 +9,6 @@ FigureModel::FigureModel(QGraphicsItem *parent) : QGraphicsItem(parent) {
 
 void FigureModel::move(int dx, int dy) {
     int newX = centerX + dx, newY = centerY + dy;
-
-    //update();
 }
 
 void FigureModel::mousePressEvent(QGraphicsSceneMouseEvent *event){
@@ -29,3 +25,4 @@ void FigureModel::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
     update();
 }
+

@@ -19,3 +19,11 @@ void Romb::draw(QPainter *painter){
 void Romb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     draw(painter);
 }
+
+double Romb::calculatePerimetr(){
+    return 5;
+}
+
+double Romb::calculateSquare(){
+    return 51;
+}

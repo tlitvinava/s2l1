@@ -24,3 +24,11 @@ void Star5::draw(QPainter *painter){
 void Star5::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     draw(painter);
 }
+
+double Star5::calculatePerimetr(){
+    return 8;
+}
+
+double Star5::calculateSquare(){
+    return 81;
+}

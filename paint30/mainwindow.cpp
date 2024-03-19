@@ -1,18 +1,3 @@
-/*#include "mainwindow.h"
-#include "ui_mainwindow.h"
-
-MainWindow::MainWindow(QWidget *parent)//сделать все по кодстайлу
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}*/
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -27,114 +12,83 @@ MainWindow::~MainWindow()
 #include <star6.h>
 #include <star8.h>
 #include <star.h>
+#include"figuremodel.h"
 
 #include <QGraphicsProxyWidget>
 #include <QGraphicsSceneMouseEvent>
 #include <QMessageBox>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QTransform>
+#include <QLineEdit>
+#include <QTimer>
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow){
     ui->setupUi(this);
 
-
-    // QVBoxLayout *layout = new QVBoxLayout;
-    // layout->addWidget(label);
-    // this->setLayout(layout);
-    // ui->statusbar->addWidget(label);
-
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
+    //QGraphicsView view(&scene);
+        //view.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-    // label = new QLabel(this);
-    // QGraphicsProxyWidget *proxy = scene->addWidget(label);
-    // proxy->setPos(0, 25);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-// void MainWindow::mouseMoveEvent(QMouseEvent *event){
-//     ui->labelX->setText("X: " + QString::number(event->x())/* + "; Y: " + QString::number(event->y())*/);
-//     QMainWindow::mouseMoveEvent(event);
-// }
-// void MainWindow::mouseMoveEvent(QMouseEvent *event){
-//     ui->labelX->setText("X: " + QString::number(event->pos().x()));
-//     QMainWindow::mouseMoveEvent(event);
-// }
-
-/*void MainWindow::on_StarButton_clicked(){
-    QMessageBox message;
-    message.setText("Choose star: ");
-
-    QAbstractButton* button1 = message.addButton("5", QMessageBox::YesRole);
-    QAbstractButton* button2 = message.addButton("6", QMessageBox::NoRole);
-    QAbstractButton* button3 = message.addButton("8", QMessageBox::RejectRole);
-
-    message.exec();
-
-    if(message.clickedButton() == button1){
-        Star *st5 = new Star(5);
-        scene->addItem(st5);
-    } else if(message.clickedButton() == button2){
-        Star *st6 = new Star(6);
-        scene->addItem(st6);
-    } else if(message.clickedButton() == button3){
-        Star *st8 = new Star(8);
-        scene->addItem(st8);
-    }
-}*/
-
-/*void MainWindow::on_TriangleButton_clicked(){
-    Triangle *tr = new Triangle();
-    scene->addItem(tr);
+///////////////
+void MainWindow::updateAreaDisplay(QString newArea) {
+    ui->label_2->setText("S: " + newArea);
 }
 
-void MainWindow::on_CircleButton_clicked(){
-    Circle *cr = new Circle();
-    scene->addItem(cr);
+void MainWindow::updatePerimetrDisplay(QString newP) {
+    ui->label_3->setText("P: " + newP);
 }
 
-void MainWindow::on_LineButton_clicked(){
-    Line *ln = new Line();
-    scene->addItem(ln);
+void MainWindow::updateCenterDisplay(QString newX, QString newY) {
+    ui->label_4->setText("CenterX: " + newX);
+    ui->label_5->setText("CenterY: " + newY);
 }
 
-void MainWindow::on_SquareButton_clicked(){
-    Square *sq = new Square();
-    scene->addItem(sq);
+void MainWindow::infoFigure(FigureModel* figure){
+    QTimer *timer = new QTimer(this);
+
+    static double oldS = figure->square;
+    static double oldP = figure->perimetr;
+    static int oldX = figure->centerX;
+    static int oldY = figure->centerY;
+    connect(timer, &QTimer::timeout, [this, figure]{
+        figure->calculateSquare();
+        figure->calculatePerimetr();
+        if (figure->square != oldS) {
+            MainWindow::updateAreaDisplay(QString::number(figure->square));
+            oldS = figure->square;
+        }
+        if (figure->perimetr != oldP) {
+            MainWindow::updatePerimetrDisplay(QString::number(figure->perimetr));
+            oldP = figure->perimetr;
+        }
+        if (figure->centerX != oldX || figure->centerY != oldY) {
+            MainWindow::updateCenterDisplay(QString::number(figure->centerX), QString::number(figure->centerY));
+            oldX = figure->centerX;
+            oldY = figure->centerY;
+        }
+    });
 }
 
-void MainWindow::on_RectangleButton_clicked(){
-    Rectangle *rec = new Rectangle();
-    scene->addItem(rec);
-}
-
-void MainWindow::on_RhombusButton_clicked(){
-    Romb *rh = new Romb();
-    scene->addItem(rh);
-}
-
-void MainWindow::on_HexagonButton_clicked(){
-    Hexagon *hg = new Hexagon();
-    scene->addItem(hg);
-}
-
-
-void MainWindow::on_ClearButton_clicked(){
-    scene->clear();
-}
-*/
 //////////////////////////////////////////////////////////////////////
 
 void MainWindow::on_pushButton_clicked()
 {
     Triangle *tr = new Triangle();
     scene->addItem(tr);
+    lastFigureModel=tr;
+
 }
 
 
@@ -142,6 +96,7 @@ void MainWindow::on_pushButton_2_clicked()
 {
     Circle *cr = new Circle();
     scene->addItem(cr);
+    lastFigureModel=cr;
 }
 
 
@@ -149,6 +104,8 @@ void MainWindow::on_pushButton_3_clicked()
 {
     Square *sq = new Square();
     scene->addItem(sq);
+    lastFigureModel=sq;
+
 }
 
 
@@ -156,6 +113,8 @@ void MainWindow::on_pushButton_4_clicked()
 {
     Rectangle *rec = new Rectangle();
     scene->addItem(rec);
+    lastFigureModel=rec;
+
 }
 
 
@@ -163,6 +122,8 @@ void MainWindow::on_pushButton_5_clicked()
 {
     Line *ln = new Line();
     scene->addItem(ln);
+    lastFigureModel=ln;
+
 }
 
 
@@ -170,6 +131,8 @@ void MainWindow::on_pushButton_6_clicked()
 {
     Romb *rh = new Romb();
     scene->addItem(rh);
+    lastFigureModel=rh;
+
 }
 
 
@@ -177,6 +140,8 @@ void MainWindow::on_pushButton_7_clicked()
 {
     Hexagon *hg = new Hexagon();
     scene->addItem(hg);
+    lastFigureModel=hg;
+
 }
 
 
@@ -184,6 +149,8 @@ void MainWindow::on_pushButton_8_clicked()
 {
     Star *st8 = new Star(8);
     scene->addItem(st8);
+    lastFigureModel=st8;
+
 }
 
 
@@ -191,6 +158,8 @@ void MainWindow::on_pushButton_9_clicked()
 {
     Star *st5 = new Star(5);
     scene->addItem(st5);
+    lastFigureModel=st5;
+
 }
 
 
@@ -198,5 +167,101 @@ void MainWindow::on_pushButton_10_clicked()
 {
     Star *st6 = new Star(6);
     scene->addItem(st6);
+    lastFigureModel=st6;
+
+}
+
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
+
+    // Переносим центр координат в центр фигуры
+    transform.translate(lastFigureModel->centerX, lastFigureModel->centerY);
+
+    // Вращаем
+    qreal angle = 45.0; // ваш угол вращения
+    transform.rotate(angle);
+
+    // Возвращаем центр координат обратно
+    transform.translate(-lastFigureModel->centerX, -lastFigureModel->centerY);
+
+    // Применяем трансформацию к фигуре
+    lastFigureModel->setTransform(transform);
+
+}
+
+
+void MainWindow::on_pushButton_12_clicked()
+{
+        scene->clear();
+}
+
+void MainWindow::on_pushButton_13_clicked()//масштабирование в 2 раза
+{
+    //QTransform transform; // Объявляем transform здесь
+    QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
+
+
+    // Переносим центр координат в центр фигуры
+    transform.translate(lastFigureModel->centerX, lastFigureModel->centerY);
+
+    // Масштабируем
+    qreal scaleFactor = 2.0; // ваш масштаб
+    transform.scale(scaleFactor, scaleFactor);
+
+    // Возвращаем центр координат обратно
+    transform.translate(-lastFigureModel->centerX, -lastFigureModel->centerY);
+
+    // Применяем трансформацию к фигуре
+    lastFigureModel->setTransform(transform);
+}
+
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    //QTransform transform; // Объявляем transform здесь
+    QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
+
+
+    // Переносим центр координат в центр фигуры
+    transform.translate(lastFigureModel->centerX, lastFigureModel->centerY);
+
+    // Масштабируем
+    qreal scaleFactor = 0.5; // ваш масштаб
+    transform.scale(scaleFactor, scaleFactor);
+
+    // Возвращаем центр координат обратно
+    transform.translate(-lastFigureModel->centerX, -lastFigureModel->centerY);
+
+    // Применяем трансформацию к фигуре
+    lastFigureModel->setTransform(transform);
+}
+
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    QTransform transform = lastFigureModel->transform(); // Получаем текущую трансформацию
+
+    // Переносим центр координат в центр фигуры
+    transform.translate(lastFigureModel->centerX, lastFigureModel->centerY);
+
+    // Вращаем
+    qreal angle = -45.0; // ваш угол вращения
+    transform.rotate(angle);
+
+    // Возвращаем центр координат обратно
+    transform.translate(-lastFigureModel->centerX, -lastFigureModel->centerY);
+
+    // Применяем трансформацию к фигуре
+    lastFigureModel->setTransform(transform);
+    //lineEdit->setText("Новое значение");
+
+}
+
+
+void MainWindow::on_lineEdit_editingFinished()
+{
+
 }
 

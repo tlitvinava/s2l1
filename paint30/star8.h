@@ -9,6 +9,8 @@ public:
 
     void draw(QPainter *painter) override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    double calculatePerimetr()override;
+    double calculateSquare()override;
 };
 
 #endif // STAR8_H

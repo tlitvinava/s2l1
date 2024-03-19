@@ -9,10 +9,8 @@ public:
 
     void draw(QPainter *painter) override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
-    // double Square();
-    // double Perimeter();
-    // std::pair<double, double> CenterOfMass();
+    double calculatePerimetr()override;
+    double calculateSquare()override;
 };
 
 
